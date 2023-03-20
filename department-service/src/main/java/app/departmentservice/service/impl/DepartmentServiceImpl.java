@@ -1,10 +1,9 @@
 package app.departmentservice.service.impl;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import app.departmentservice.entity.DepartmentEntity;
+import app.departmentservice.exception.ResourceNotFoundException;
 import app.departmentservice.mapper.DepartmentMapper;
 import app.departmentservice.payload.DepartmentDTO;
 import app.departmentservice.repository.DepartmentRepository;
@@ -27,10 +26,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 	}
 
 	@Override
-	public Optional<DepartmentDTO> findByCode(String code) {
-		Optional<DepartmentEntity> departmentEntity = departmentRepository
-				.findByDepartmentCode(code);
+	public DepartmentDTO findByCode(String code) {
+		DepartmentEntity departmentEntity = departmentRepository.findByDepartmentCode(code)
+				.orElseThrow(() -> new ResourceNotFoundException("department", "code", code));
 
-		return departmentEntity.map(DepartmentMapper::toDepartmentDTO);
+		return DepartmentMapper.toDepartmentDTO(departmentEntity);
 	}
 }

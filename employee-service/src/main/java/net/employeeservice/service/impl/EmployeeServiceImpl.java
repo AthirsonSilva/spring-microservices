@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import net.employeeservice.entity.EmployeeEntity;
+import net.employeeservice.exception.ResourceNotFoundException;
 import net.employeeservice.mapper.EmployeeMapper;
 import net.employeeservice.payload.EmployeeDTO;
 import net.employeeservice.repository.EmployeeRepository;
@@ -26,7 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public EmployeeDTO findById(Long id) {
 		EmployeeEntity employee = employeeRepository.findById(id).orElseThrow(
-				() -> new RuntimeException("Employee not found with id: " + id));
+				() -> new ResourceNotFoundException("employee", "id", id));
 
 		return EmployeeMapper.toEmployeeDTO(employee);
 	}
