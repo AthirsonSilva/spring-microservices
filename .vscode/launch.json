@@ -2,13 +2,32 @@
 	"configurations": [
 		{
 			"type": "java",
+			"name": "EmployeeServiceApplication",
+			"request": "launch",
+			"mainClass": "app.employeeservice.EmployeeServiceApplication",
+			"projectName": "employee-service"
+		},
+		{
+			"type": "java",
 			"name": "Spring Boot-DepartmentServiceApplication<department-service>",
 			"request": "launch",
 			"cwd": "${workspaceFolder}",
 			"mainClass": "app.departmentservice.DepartmentServiceApplication",
 			"projectName": "department-service",
 			"args": "",
-			"envFile": "${workspaceFolder}/.env"
+			"envFile": "${workspaceFolder}/.env",
+			"vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=39483 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=department-service"
+		},
+		{
+			"type": "java",
+			"name": "Spring Boot-EmployeeServiceApplication<employee-service>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"mainClass": "net.employeeservice.EmployeeServiceApplication",
+			"projectName": "employee-service",
+			"args": "",
+			"envFile": "${workspaceFolder}/.env",
+			"vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=42621 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=employee-service"
 		}
 	]
 }
