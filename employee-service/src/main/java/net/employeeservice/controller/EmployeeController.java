@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
+import net.employeeservice.payload.APIResponseDTO;
 import net.employeeservice.payload.EmployeeDTO;
 import net.employeeservice.service.EmployeeService;
 
@@ -26,7 +27,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("{id}")
-	public ResponseEntity<EmployeeDTO> get(@PathVariable Long id) {
+	public ResponseEntity<APIResponseDTO> get(@PathVariable Long id) {
 		return new ResponseEntity<>(employeeService.findById(id), HttpStatus.OK);
 	}
 }

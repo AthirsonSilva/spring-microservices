@@ -2,6 +2,7 @@ package net.employeeservice.entity;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,5 +27,7 @@ public class EmployeeEntity implements Serializable {
 	private Long id;
 	private String firstName;
 	private String lastName;
+	@Column(unique = true)
 	private String email;
+	private String departmentCode;
 }
