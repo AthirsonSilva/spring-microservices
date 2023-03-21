@@ -44,6 +44,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDetails);
 	}
 
+	@ExceptionHandler(EmailAlreadyExistsException.class)
+	public ResponseEntity<ErrorDetails> handleEmailAlreadyExistsException(EmailAlreadyExistsException exception,
+			WebRequest request) {
+		ErrorDetails errorDetails = new ErrorDetails(
+				LocalDateTime.now(),
+				exception.getMessage(),
+				request.getDescription(false),
+				String.valueOf(HttpStatus.CONFLICT));
+
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(errorDetails);
+	}
+
 	@Override
 	@Nullable
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
