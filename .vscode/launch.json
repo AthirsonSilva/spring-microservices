@@ -38,6 +38,16 @@
 			"projectName": "registry",
 			"args": "",
 			"envFile": "${workspaceFolder}/.env"
+		},
+		{
+			"type": "java",
+			"name": "Spring Boot-GatewayApplication<gateway>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"mainClass": "api.gateway.GatewayApplication",
+			"projectName": "gateway",
+			"args": "",
+			"envFile": "${workspaceFolder}/.env"
 		}
 	]
 }
