@@ -1,0 +1,31 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      enabled: 'true'
+      show-details: always
+  info:
+    env:
+      enabled: 'true'
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    enabled: 'true'
+  instance:
+    appname: config-server
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          default-label: main
+          clone-on-start: 'true'
+          uri: https://github.com/AthirsonSilva/config-server
+  application:
+    name: config-server
+server:
+  port: '8888'

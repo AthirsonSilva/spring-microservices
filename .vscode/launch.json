@@ -2,6 +2,18 @@
 	"configurations": [
 		{
 			"type": "java",
+			"name": "ConfigApplication",
+			"request": "launch",
+			"mainClass": "server.config.ConfigApplication"
+		},
+		{
+			"type": "java",
+			"name": "RegistryApplication",
+			"request": "launch",
+			"mainClass": "app.registry.RegistryApplication"
+		},
+		{
+			"type": "java",
 			"name": "EmployeeServiceApplication",
 			"request": "launch",
 			"mainClass": "app.employeeservice.EmployeeServiceApplication",
@@ -31,11 +43,31 @@
 		},
 		{
 			"type": "java",
-			"name": "Spring Boot-RegistryApplication<registry>",
+			"name": "Spring Boot-RegistryApplication<app-registry>",
 			"request": "launch",
 			"cwd": "${workspaceFolder}",
 			"mainClass": "app.registry.RegistryApplication",
-			"projectName": "registry",
+			"projectName": "app-registry",
+			"args": "",
+			"envFile": "${workspaceFolder}/.env"
+		},
+		{
+			"type": "java",
+			"name": "Spring Boot-GatewayApplication<api-gateway>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"mainClass": "api.gateway.GatewayApplication",
+			"projectName": "api-gateway",
+			"args": "",
+			"envFile": "${workspaceFolder}/.env"
+		},
+		{
+			"type": "java",
+			"name": "Spring Boot-ConfigApplication<config>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"mainClass": "server.config.ConfigApplication",
+			"projectName": "config",
 			"args": "",
 			"envFile": "${workspaceFolder}/.env"
 		},
@@ -46,6 +78,16 @@
 			"cwd": "${workspaceFolder}",
 			"mainClass": "api.gateway.GatewayApplication",
 			"projectName": "gateway",
+			"args": "",
+			"envFile": "${workspaceFolder}/.env"
+		},
+		{
+			"type": "java",
+			"name": "Spring Boot-RegistryApplication<registry>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"mainClass": "app.registry.RegistryApplication",
+			"projectName": "registry",
 			"args": "",
 			"envFile": "${workspaceFolder}/.env"
 		}
