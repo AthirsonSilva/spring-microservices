@@ -28,6 +28,16 @@
 			"args": "",
 			"envFile": "${workspaceFolder}/.env",
 			"vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=42621 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=employee-service"
+		},
+		{
+			"type": "java",
+			"name": "Spring Boot-RegistryApplication<registry>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"mainClass": "app.registry.RegistryApplication",
+			"projectName": "registry",
+			"args": "",
+			"envFile": "${workspaceFolder}/.env"
 		}
 	]
 }

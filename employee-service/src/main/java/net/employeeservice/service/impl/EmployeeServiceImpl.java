@@ -1,5 +1,7 @@
 package net.employeeservice.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -50,8 +52,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return apiResponse;
 	}
 
+	@Override
+	public List<EmployeeDTO> findByDepartment(String code) {
+		List<EmployeeDTO> employees = employeeRepository.findByDepartmentCode(code)
+				.stream().map(employee -> EmployeeMapper.toEmployeeDTO(employee))
+				.toList();
+
+		return employees;
+	}
+
 	private DepartmentDTO fetchEmployeeDepartment(String departmentCode) {
-		return webClient.get()
+		return webClient
+				.get()
 				.uri("http://localhost:8080/api/v1/department/" + departmentCode)
 				.retrieve()
 				.bodyToMono(DepartmentDTO.class)
