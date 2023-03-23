@@ -32,7 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			throw new EmailAlreadyExistsException(employeeDTO.getEmail());
 		}
 
-		if (fetchEmployeeDepartment(employeeDTO.getDepartmentCode()) == null)
+		if (fetchEmployeeDepartmentFeign(employeeDTO.getDepartmentCode()) == null)
 			throw new ResourceNotFoundException("department", "code", employeeDTO.getDepartmentCode());
 
 		EmployeeEntity employeeEntity = employeeRepository.save(EmployeeMapper.toEmployeeEntity(employeeDTO));
