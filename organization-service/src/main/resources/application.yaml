@@ -1,22 +1,7 @@
 spring:
   application:
     name: organization-service
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/organization_db
-      
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      enabled: 'true'
-      show-details: always
-  info:
-    env:
-      enabled: 'true'
 
-server:
-    port: 8083
+  config:
+    import:
+    - "optional:configserver:http://localhost:8888"
