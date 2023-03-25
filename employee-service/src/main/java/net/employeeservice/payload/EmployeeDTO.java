@@ -22,4 +22,5 @@ public class EmployeeDTO {
 	@Email(message = "An employee must have a valid email address")
 	private String email;
 	private String departmentCode;
+	private String organizationCode;
 }

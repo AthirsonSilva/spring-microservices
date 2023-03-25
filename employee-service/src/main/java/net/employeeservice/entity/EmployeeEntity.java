@@ -30,4 +30,5 @@ public class EmployeeEntity implements Serializable {
 	@Column(unique = true)
 	private String email;
 	private String departmentCode;
+	private String organizationCode;
 }

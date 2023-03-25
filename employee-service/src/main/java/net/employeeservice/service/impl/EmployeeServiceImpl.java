@@ -18,8 +18,9 @@ import net.employeeservice.mapper.EmployeeMapper;
 import net.employeeservice.payload.APIResponseDTO;
 import net.employeeservice.payload.DepartmentDTO;
 import net.employeeservice.payload.EmployeeDTO;
+import net.employeeservice.payload.OrganizationDTO;
 import net.employeeservice.repository.EmployeeRepository;
-import net.employeeservice.service.APIClient;
+import net.employeeservice.service.DepartmentFeignClient;
 import net.employeeservice.service.EmployeeService;
 
 @Service
@@ -28,7 +29,7 @@ import net.employeeservice.service.EmployeeService;
 public class EmployeeServiceImpl implements EmployeeService {
 	private final EmployeeRepository employeeRepository;
 	private final WebClient webClient;
-	private APIClient apiClient;
+	private DepartmentFeignClient apiClient;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
@@ -56,8 +57,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 				() -> new ResourceNotFoundException("employee", "id", id));
 
 		DepartmentDTO department = fetchEmployeeDepartmentFeign(employee.getDepartmentCode());
+		OrganizationDTO organization = fetchEmployeeOrganization(employee.getOrganizationCode());
 
-		APIResponseDTO apiResponse = new APIResponseDTO(EmployeeMapper.toEmployeeDTO(employee), department);
+		APIResponseDTO apiResponse = new APIResponseDTO(EmployeeMapper.toEmployeeDTO(employee), department, organization);
 
 		return apiResponse;
 	}
@@ -71,12 +73,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employees;
 	}
 
-	private DepartmentDTO fetchEmployeeDepartment(String departmentCode) {
+	private OrganizationDTO fetchEmployeeOrganization(String organizationCode) {
 		return webClient
 				.get()
-				.uri("http://localhost:8080/api/v1/department/" + departmentCode)
+				.uri("http://localhost:8083/api/v1/organizations?code=" + organizationCode)
 				.retrieve()
-				.bodyToMono(DepartmentDTO.class)
+				.bodyToMono(OrganizationDTO.class)
 				.block();
 	}
 
@@ -96,7 +98,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		department.setDepartmentName("Default DP");
 		department.setDepartmentDescription("Default Department for research");
 
-		APIResponseDTO apiResponse = new APIResponseDTO(EmployeeMapper.toEmployeeDTO(employee), department);
+		OrganizationDTO organization = fetchEmployeeOrganization(employee.getOrganizationCode());
+
+		APIResponseDTO apiResponse = new APIResponseDTO(EmployeeMapper.toEmployeeDTO(employee), department, organization);
 
 		return apiResponse;
 	}
