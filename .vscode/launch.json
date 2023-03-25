@@ -2,6 +2,12 @@
 	"configurations": [
 		{
 			"type": "java",
+			"name": "OrganizationServiceApplication",
+			"request": "launch",
+			"mainClass": "app.organizationservice.OrganizationServiceApplication"
+		},
+		{
+			"type": "java",
 			"name": "ConfigApplication",
 			"request": "launch",
 			"mainClass": "server.config.ConfigApplication"
@@ -88,6 +94,16 @@
 			"cwd": "${workspaceFolder}",
 			"mainClass": "app.registry.RegistryApplication",
 			"projectName": "registry",
+			"args": "",
+			"envFile": "${workspaceFolder}/.env"
+		},
+		{
+			"type": "java",
+			"name": "Spring Boot-OrganizationServiceApplication<organization-service>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"mainClass": "app.organizationservice.OrganizationServiceApplication",
+			"projectName": "organization-service",
 			"args": "",
 			"envFile": "${workspaceFolder}/.env"
 		}
