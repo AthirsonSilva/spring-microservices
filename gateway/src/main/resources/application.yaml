@@ -14,13 +14,17 @@ spring:
   cloud:
     gateway:
       routes[0]:
-        id: employee-service
+        id: employee-services
         uri: lb://employee-service
         predicates[0]: Path=/api/v1/employee/**
       routes[1]:
         id: department-service
         predicates[0]: Path=/api/v1/department/**
         uri: lb://department-service
+      routes[2]:
+        id: organization-service
+        predicates[0]: Path=/api/v1/organizations/**
+        uri: lb://organization-service
   application:
     name: api-gateway
 eureka:
