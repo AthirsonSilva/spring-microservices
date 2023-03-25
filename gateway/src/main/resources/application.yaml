@@ -5,14 +5,23 @@ management:
         include: '*'
   endpoint:
     health:
-      enabled: 'true'
+      enabled: true
       show-details: always
   info:
     env:
-      enabled: 'true'
+      enabled: true
 spring:
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: 'http://localhost:5174'
+            allowedMethods: 'GET, POST, PUT, DELETE, OPTIONS'
+            allowedHeaders: '*'
+            allowCredentials: true
+            maxAge: 3600
+
       routes[0]:
         id: employee-services
         uri: lb://employee-service
@@ -31,8 +40,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-    enabled: 'true'
+    enabled: true
   instance:
     appname: api-gateway
 server:
-  port: '9191'
+  port: 9191
