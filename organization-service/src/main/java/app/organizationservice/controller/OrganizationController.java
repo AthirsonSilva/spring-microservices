@@ -26,7 +26,7 @@ public class OrganizationController {
 	}
 
 	@GetMapping("{id}")
-	public ResponseEntity<OrganizationDTO> findById(@PathVariable Long id) {
+	public ResponseEntity<OrganizationDTO> findById(@PathVariable String id) {
 		return new ResponseEntity<>(organizationService.findById(id), HttpStatus.FOUND);
 	}
 

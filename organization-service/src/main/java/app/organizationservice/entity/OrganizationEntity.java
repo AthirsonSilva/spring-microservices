@@ -3,14 +3,10 @@ package app.organizationservice.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,18 +18,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Entity
-@Table(name = "organizations")
+@Document(collection = "organizations")
 public class OrganizationEntity implements Serializable {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@Column(nullable = false, unique = true)
+	private String id;
 	private String organizationName;
-	@Column(nullable = false)
 	private String organizationDescription;
-	@Column(nullable = false, unique = true)
 	private String organizationCode;
-	@CreationTimestamp
+	@CreatedDate
 	private LocalDateTime creationDate;
 }

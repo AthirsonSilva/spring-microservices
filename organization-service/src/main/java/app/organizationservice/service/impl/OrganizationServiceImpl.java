@@ -19,7 +19,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 	private final OrganizationRepository organizationRepository;
 
 	@Override
-	public OrganizationDTO findById(Long id) {
+	public OrganizationDTO findById(String id) {
 		return organizationRepository.findById(id).map(org -> INSTANCE.toOrganizationDTO(org))
 				.orElseThrow(() -> new ResourceNotFoundException("Organization", "id", id));
 	}

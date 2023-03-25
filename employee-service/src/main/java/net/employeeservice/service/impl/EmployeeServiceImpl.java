@@ -1,6 +1,8 @@
 package net.employeeservice.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@CircuitBreaker(name = "${spring.application.name}", fallbackMethod = "getDefaultDepartment")
-	@Retry(name = "${spring.application.name}", fallbackMethod = "getDefaultDepartment")
+	@Retry(name = "${spring.application.name}", fallbackMethod = "getDefaultOrganization")
 	@Override
 	public APIResponseDTO findById(Long id) {
 		LOGGER.info("inside findById method of EmployeeServiceImpl class");
@@ -84,6 +86,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	private DepartmentDTO fetchEmployeeDepartmentFeign(String departmentCode) {
 		return apiClient.getDepartment(departmentCode);
+	}
+
+	private APIResponseDTO getDefaultOrganization(Long id, Exception e) {
+		LOGGER.info("inside getDefaultOrganization method of EmployeeServiceImpl class");
+
+		EmployeeEntity employee = employeeRepository.findById(id).orElseThrow(
+				() -> new ResourceNotFoundException("employee", "id", id));
+
+		DepartmentDTO department = fetchEmployeeDepartmentFeign(employee.getDepartmentCode());
+
+		OrganizationDTO organization = new OrganizationDTO();
+		organization.setId(String.valueOf(UUID.randomUUID()));
+		organization.setOrganizationCode("O001");
+		organization.setOrganizationName("Default Org");
+		organization.setOrganizationDescription("Default Organization for research");
+		organization.setCreationDate(LocalDateTime.now());
+
+		APIResponseDTO apiResponse = new APIResponseDTO(EmployeeMapper.toEmployeeDTO(employee), department, organization);
+
+		return apiResponse;
 	}
 
 	private APIResponseDTO getDefaultDepartment(Long id, Exception e) {

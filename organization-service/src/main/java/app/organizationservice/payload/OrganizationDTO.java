@@ -14,7 +14,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class OrganizationDTO {
-	private Long id;
+	private String id;
 	private String organizationName;
 	private String organizationDescription;
 	private String organizationCode;
